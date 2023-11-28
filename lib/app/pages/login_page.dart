@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../core/shared/services/url_launch/i_url_launch_service.dart';
 import '../core/shared/themes/color_extension.dart';
+import '../core/shared/validators/email_validator.dart';
 import '../core/shared/validators/password_validator.dart';
 import '../core/shared/widgets/tg_password_field.dart';
 import '../core/shared/widgets/tg_text_field.dart';
@@ -58,6 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       TgTextField(
                         label: 'Usuário',
+                        validator: emailValidator,
                         controller: TextEditingController(),
                         prefixIcon: const Icon(Icons.person),
                       ),

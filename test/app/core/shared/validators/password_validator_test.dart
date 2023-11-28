@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:target_project/app/core/shared/validators/password_validator.dart';
 
 void main() {
-  group('PasswordValidator | Failure |', () {
+  group('PasswordValidator | Success |', () {
     test(
       'should be valid when length is >2 and <=20 and dont had any special character',
       () {
@@ -33,10 +33,11 @@ void main() {
     });
 
     test(
-        'should be invalid when length is >2 and <20 but had any special character',
-        () {
-      final message = passwordValidator('0123456@4567890');
-      expect(message, isA<String>());
-    });
+      'should be invalid when length is >2 and <20 but had any special character',
+      () {
+        final message = passwordValidator('0123456@4567890');
+        expect(message, isA<String>());
+      },
+    );
   });
 }
