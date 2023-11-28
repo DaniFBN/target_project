@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+typedef FieldValidator = String? Function(String? value);
+
 class TgTextField extends StatelessWidget {
   const TgTextField({
     super.key,
@@ -13,7 +15,7 @@ class TgTextField extends StatelessWidget {
 
   final String label;
   final TextEditingController controller;
-  final String? Function(String? value)? validator;
+  final FieldValidator? validator;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final bool obscureText;
