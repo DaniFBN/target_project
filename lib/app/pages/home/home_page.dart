@@ -33,14 +33,56 @@ class _HomePageState extends State<HomePage> {
     focusNode.requestFocus();
   }
 
-  void delete(int index) {
-    widget.homeStore.delete(index);
-  }
-
   void toEdit(int index, String value) {
     controller.text = value;
 
     widget.homeStore.toEdit(index);
+
+    focusNode.requestFocus();
+  }
+
+  void delete(int index) async {
+    await showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        final theme = Theme.of(context);
+
+        return Dialog(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text('Tem certeza que deseja apagar?'),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      onPressed: Navigator.of(context).pop,
+                      child: Text(
+                        'Cancelar',
+                        style: theme.textTheme.bodyMedium,
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        widget.homeStore.delete(index);
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('Apagar'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+
+    focusNode.requestFocus();
   }
 
   @override
