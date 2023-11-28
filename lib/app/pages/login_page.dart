@@ -4,8 +4,8 @@ import '../core/shared/services/url_launch/i_url_launch_service.dart';
 import '../core/shared/themes/color_extension.dart';
 import '../core/shared/validators/email_validator.dart';
 import '../core/shared/validators/password_validator.dart';
-import '../core/shared/widgets/tg_password_field.dart';
-import '../core/shared/widgets/tg_text_field.dart';
+import '../core/shared/widgets/fields/tg_password_field.dart';
+import '../core/shared/widgets/fields/tg_text_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({
@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: Column(
             children: [
               const Spacer(),

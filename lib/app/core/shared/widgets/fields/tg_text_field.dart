@@ -11,6 +11,7 @@ class TgTextField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.obscureText = false,
+    this.onSubmit,
   });
 
   final String label;
@@ -19,6 +20,7 @@ class TgTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final bool obscureText;
+  final void Function(String value)? onSubmit;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,7 @@ class TgTextField extends StatelessWidget {
           controller: controller,
           validator: validator,
           obscureText: obscureText,
+          onFieldSubmitted: onSubmit,
           decoration: InputDecoration(
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
