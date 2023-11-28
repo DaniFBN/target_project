@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 typedef FieldValidator = String? Function(String? value);
@@ -11,6 +12,7 @@ class TgTextField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.obscureText = false,
+    this.focusNode,
     this.onSubmit,
   });
 
@@ -20,6 +22,7 @@ class TgTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final bool obscureText;
+  final FocusNode? focusNode;
   final void Function(String value)? onSubmit;
 
   @override
@@ -35,6 +38,7 @@ class TgTextField extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         TextFormField(
+          focusNode: focusNode,
           controller: controller,
           validator: validator,
           obscureText: obscureText,

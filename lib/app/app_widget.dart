@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'core/shared/services/url_launch/url_launch_service.dart';
 import 'core/shared/themes/app_theme.dart';
-import 'pages/home_page.dart';
+import 'pages/home/home_page.dart';
+import 'pages/home/home_store.dart';
 import 'pages/login_page.dart';
 
 class AppWidget extends StatelessWidget {
@@ -14,12 +15,8 @@ class AppWidget extends StatelessWidget {
       theme: AppTheme.light,
       initialRoute: '/',
       routes: {
-        '/': (_) {
-          return const LoginPage(
-            urlLaunchService: UrlLaunchService(),
-          );
-        },
-        '/home': (_) => const HomePage(),
+        '/': (_) => const LoginPage(urlLaunchService: UrlLaunchService()),
+        '/home': (_) => HomePage(homeStore: HomeStore()),
       },
     );
   }
