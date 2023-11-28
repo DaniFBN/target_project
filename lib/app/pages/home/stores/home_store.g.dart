@@ -19,58 +19,41 @@ mixin _$HomeStore on HomeBase, Store {
   late final _$stateAtom = Atom(name: 'HomeBase.state', context: context);
 
   @override
-  List<String> get state {
+  HomeState get state {
     _$stateAtom.reportRead();
     return super.state;
   }
 
   @override
-  set state(List<String> value) {
+  set state(HomeState value) {
     _$stateAtom.reportWrite(value, super.state, () {
       super.state = value;
     });
   }
 
-  late final _$editingIndexAtom =
-      Atom(name: 'HomeBase.editingIndex', context: context);
+  late final _$loadAsyncAction = AsyncAction('HomeBase.load', context: context);
 
   @override
-  int? get editingIndex {
-    _$editingIndexAtom.reportRead();
-    return super.editingIndex;
+  Future<void> load() {
+    return _$loadAsyncAction.run(() => super.load());
   }
 
+  late final _$saveAsyncAction = AsyncAction('HomeBase.save', context: context);
+
   @override
-  set editingIndex(int? value) {
-    _$editingIndexAtom.reportWrite(value, super.editingIndex, () {
-      super.editingIndex = value;
-    });
+  Future<void> save(String value) {
+    return _$saveAsyncAction.run(() => super.save(value));
+  }
+
+  late final _$editAsyncAction = AsyncAction('HomeBase.edit', context: context);
+
+  @override
+  Future<void> edit(String newValue) {
+    return _$editAsyncAction.run(() => super.edit(newValue));
   }
 
   late final _$HomeBaseActionController =
       ActionController(name: 'HomeBase', context: context);
-
-  @override
-  void save(String value) {
-    final _$actionInfo =
-        _$HomeBaseActionController.startAction(name: 'HomeBase.save');
-    try {
-      return super.save(value);
-    } finally {
-      _$HomeBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void edit(String newValue) {
-    final _$actionInfo =
-        _$HomeBaseActionController.startAction(name: 'HomeBase.edit');
-    try {
-      return super.edit(newValue);
-    } finally {
-      _$HomeBaseActionController.endAction(_$actionInfo);
-    }
-  }
 
   @override
   void delete(int index) {
@@ -98,7 +81,6 @@ mixin _$HomeStore on HomeBase, Store {
   String toString() {
     return '''
 state: ${state},
-editingIndex: ${editingIndex},
 isEditing: ${isEditing}
     ''';
   }

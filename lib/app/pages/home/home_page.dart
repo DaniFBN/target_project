@@ -4,7 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../core/shared/themes/color_extension.dart';
 import '../../core/shared/widgets/fields/tg_text_field.dart';
 import '../../core/shared/widgets/item_card.dart';
-import 'home_store.dart';
+import 'stores/home_store.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -21,6 +21,15 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final controller = TextEditingController();
   final focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      widget.homeStore.load();
+    });
+  }
 
   void save(String value) {
     if (widget.homeStore.isEditing) {
@@ -109,10 +118,10 @@ class _HomePageState extends State<HomePage> {
                     child: Observer(
                       builder: (context) {
                         return ListView.separated(
-                          itemCount: widget.homeStore.state.length,
+                          itemCount: widget.homeStore.state.data.length,
                           separatorBuilder: (_, __) => const Divider(),
                           itemBuilder: (context, index) {
-                            final item = widget.homeStore.state[index];
+                            final item = widget.homeStore.state.data[index];
 
                             return ItemCard(
                               label: item,
