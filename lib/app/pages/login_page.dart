@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../core/shared/services/url_launch/i_url_launch_service.dart';
 import '../core/shared/themes/color_extension.dart';
 import '../core/shared/widgets/tg_password_field.dart';
 import '../core/shared/widgets/tg_text_field.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({
+    super.key,
+    required this.urlLaunchService,
+  });
+
+  final IUrlLaunchService urlLaunchService;
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -19,6 +25,10 @@ class _LoginPageState extends State<LoginPage> {
     if (!isValid) return;
 
     Navigator.of(context).pushReplacementNamed('/home');
+  }
+
+  void openPrivacyPolicy() {
+    widget.urlLaunchService.launchUrl('https://google.com');
   }
 
   @override
@@ -70,9 +80,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const Spacer(),
               TextButton(
-                onPressed: () {
-                  // TODO(danifbn): Open google.com
-                },
+                onPressed: openPrivacyPolicy,
                 child: const Text('Política de Privacidade'),
               ),
             ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'core/shared/services/url_launch/url_launch_service.dart';
 import 'core/shared/themes/app_theme.dart';
 import 'pages/home_page.dart';
 import 'pages/login_page.dart';
@@ -13,7 +14,11 @@ class AppWidget extends StatelessWidget {
       theme: AppTheme.light,
       initialRoute: '/',
       routes: {
-        '/': (_) => const LoginPage(),
+        '/': (_) {
+          return const LoginPage(
+            urlLaunchService: UrlLaunchService(),
+          );
+        },
         '/home': (_) => const HomePage(),
       },
     );
